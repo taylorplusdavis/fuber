@@ -1,86 +1,121 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import axios from "axios";
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const Home: NextPage = () => {
+  const [error, setError] = useState("");
+
+  const router = useRouter();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError("");
+
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const confirmPassword = e.target.confirmpassword.value;
+    const name = e.target.name.value;
+    const intent = e.target.intent.value;
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match!");
+      return;
+    }
+
+    if (!email || !password || !confirmPassword || !name || !intent) {
+      setError("Please fill out all fields!");
+      return;
+    } else {
+      axios
+        .post("http://localhost:3002/api/addUser", {
+          params: {
+            email: email,
+            password: password,
+            confirmPassword: confirmPassword,
+            name: name,
+            intent: intent,
+          },
+        })
+        .then((res) => {
+          axios
+            .get("http://localhost:3002/api/getUser", {
+              params: {
+                email: email,
+              },
+            })
+            .then((res) => {
+              localStorage.setItem("session", JSON.stringify(res.data[0]));
+            });
+          if (intent === "rider") {
+            router.push("/fuberhome");
+          } else if (intent === "driver") {
+            router.push("/fuberhomedriver");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="flex min-h-screen flex-col items-center py-2 bg-[var(--darkest-gray)] text-white">
       <Head>
-        <title>Create Next App</title>
+        <title>Fuber | Sign Up</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+      <main className="flex flex-col w-full">
+        {/* logo */}
+        <div className="logo__container">
+          <h1 className="logo__logo">Fuber</h1>
         </div>
+        {/* login */}
+        <fieldset className="form__container">
+          {error && <h1 className="form__error">{error}</h1>}
+          <legend className="signup__legend">Sign Up!</legend>
+          <form
+            className=""
+            method="post"
+            name="RegForm"
+            onSubmit={(e) => handleSubmit(e)}
+          >
+            <label>Name</label> <input name="name" type="text" />
+            <label>Email </label> <input name="email" type="email" />
+            <label>Password </label> <input name="password" type="password" />
+            <label>Confirm Password </label>
+            <input name="confirmpassword" type="password" />
+            <p>I'm registering as a</p>
+            <div className="radio__container">
+              <input type="radio" id="rider" value="rider" name="intent" />
+              <label className="radio__label" htmlFor="rider">
+                Rider
+              </label>
+            </div>
+            <div className="radio__container">
+              <input type="radio" id="driver" value="driver" name="intent" />
+              <label className="radio__label" htmlFor="driver">
+                Driver
+              </label>
+            </div>
+            <button className="signup__button" type="submit">
+              Let's go!
+            </button>
+            <p className="py-4">
+              Already have an account?{" "}
+              <Link href="/signin" className="font-bold underline">
+                Sign in here.
+              </Link>
+            </p>
+          </form>
+        </fieldset>
       </main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

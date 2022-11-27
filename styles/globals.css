@@ -1,3 +1,125 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --darkest-gray: #151515;
+  --dark-gray: #303030;
+  --border-gray: #555555;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+.logo__logo {
+  text-align: center;
+  font-size: 4rem;
+  padding: 3rem 0 1rem;
+}
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: #151515;
+  color: white;
+}
+
+input {
+  margin: 4px 0;
+  border-radius: 8px;
+  padding: 8px;
+  color: var(--black);
+}
+
+input[type="radio"] {
+  margin: 0 4px;
+  height: 20px;
+  width: 20px;
+}
+
+input[type="radio"]:checked {
+  filter: grayscale(100%);
+}
+
+.logo__header {
+  text-align: center;
+  font-size: 4rem;
+  padding: 3rem 0 1rem;
+}
+
+.form__container {
+  width: 33%;
+  margin: 0 auto;
+  background-color: #303030;
+  border-radius: 8px;
+  padding: 1rem 5rem;
+  border: 2px solid #555555;
+}
+
+.radio__label {
+  font-size: 1.5rem;
+}
+
+.signup__legend {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.signup__button {
+  width: 150px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  background-color: none;
+  background: none;
+  border: 2px solid #555555;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: white;
+  padding: 8px;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+}
+
+.signup__button:hover {
+  background-color: white;
+  color: #555555;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form__error {
+  color: red;
+  font-size: 1.2rem;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.map__container {
+  cursor: pointer;
+}
+
+.map__button {
+  position: absolute;
+  top: 5rem;
+  background-color: var(--darkest-gray);
+  color: var(--white);
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 0 8px;
+}
