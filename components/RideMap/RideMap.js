@@ -150,7 +150,7 @@ function Map() {
     <div className="relative w-full rounded h-600-px col-span-2">
       <div className="absolute  z-10 top-[4rem] w-full flex flex-col mx-auto overlay  h-[80%]">
         <div className="w-[50%] max-w-[600px] mx-auto flex overlay__bottom_container hover:-translate-y-1 transition duration-300 ease-out shadow-md hover:shadow-xl active:translate-y-0 active:shadow-sm">
-          <button className="bg-black  rounded-[8px] p-4 text-2xl w-full overlay__button drop-shadow-lg">
+          <button className="bg-black  rounded-[8px] p-4 text-2xl w-full overlay__button drop-shadow-lg ">
             {userState && userState.intent === "rider"
               ? waitingState
                 ? `Waiting for ${driver && driver.name}`
