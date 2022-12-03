@@ -3,8 +3,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "heroku-postbuild": "node server/index.js"
+    "start": "node server/index.js",
+    "heroku-postbuild": "next start"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.15.1",
