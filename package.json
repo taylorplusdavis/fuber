@@ -1,10 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "heroku-postbuild": "node server/index.js",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "node server/index.js"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.15.1",

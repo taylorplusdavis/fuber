@@ -7,6 +7,17 @@ const PORT = 3002;
 app.use(cors());
 app.use(express.json());
 
+if (process.env.NODE_ENV === "production") {
+  app.use(
+    express.static(path.join(__dirname, "..", ".next", "server", "pages"))
+  );
+  app.get("/", (req, res) => {
+    res.sendFile(
+      path.resolve(__dirname, "..", ".next", "server", "pages", "index.html")
+    );
+  });
+}
+
 //Route to get all users
 app.get("/api/getUsers", (req, res) => {
   db.query("SELECT * FROM user", (err, result) => {

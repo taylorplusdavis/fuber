@@ -36,7 +36,6 @@ const Home: NextPage = () => {
           params: {
             email: email,
             password: password,
-            confirmPassword: confirmPassword,
             name: name,
             intent: intent,
           },
