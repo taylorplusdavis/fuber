@@ -37,7 +37,7 @@ function Map() {
       lng = position.coords.longitude;
 
       // Update database with user's current location
-      axios.post("http://localhost:3002/api/updateLocation", {
+      axios.post("https://fuber.vercel.com/api/updateLocation", {
         params: {
           lat: lat,
           lng: lng,
@@ -133,7 +133,7 @@ function Map() {
 
   const handleRequest = () => {
     axios
-      .post("http://localhost:3002/api/requestRide", {
+      .post("https://fuber.vercel.com/api/requestRide", {
         params: {
           id: userState.id,
         },
@@ -147,7 +147,7 @@ function Map() {
             setWaitingState(true);
             console.log("waiting for driver");
             axios
-              .post("http://localhost:3002/api/rideStatus", {
+              .post("https://fuber.vercel.com/api/rideStatus", {
                 params: {
                   id: userState.id,
                 },
