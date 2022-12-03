@@ -22,7 +22,7 @@ const index = () => {
       return;
     } else {
       axios
-        .post("https://fuber.herokuapp.com/api/signInUser", {
+        .post("https://fuber.vercel.app/api/signInUser", {
           params: {
             email: email,
             password: password,
