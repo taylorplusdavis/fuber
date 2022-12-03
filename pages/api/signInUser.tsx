@@ -4,9 +4,12 @@ import axios from "axios";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
-  name: string,
+  name: string;
 };
 
-export default function handler(req, res) {
+export default function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<Data>
+) {
   res.status(200).json({ name: "Hello" });
 }
