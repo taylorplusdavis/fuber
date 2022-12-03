@@ -4,6 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Script from "next/script";
 import { useState } from "react";
 
 const Home: NextPage = () => {
@@ -11,7 +12,7 @@ const Home: NextPage = () => {
 
   const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     setError("");
 
@@ -49,12 +50,12 @@ const Home: NextPage = () => {
             })
             .then((res) => {
               localStorage.setItem("session", JSON.stringify(res.data[0]));
+              if (intent === "rider") {
+                router.push("/fuberhome");
+              } else if (intent === "driver") {
+                router.push("/fuberhomedriver");
+              }
             });
-          if (intent === "rider") {
-            router.push("/fuberhome");
-          } else if (intent === "driver") {
-            router.push("/fuberhomedriver");
-          }
         })
         .catch((err) => {
           console.log(err);

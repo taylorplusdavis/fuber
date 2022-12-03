@@ -31,6 +31,7 @@ const index = () => {
         .then((res) => {
           if (res.data.length > 0) {
             localStorage.setItem("session", JSON.stringify(res.data[0]));
+
             if (res.data[0].intent === "rider") {
               router.push("/fuberhome");
             } else {

@@ -123,3 +123,12 @@ form {
   padding: 1rem;
   margin: 0 8px;
 }
+
+.overlay {
+  background: none;
+  pointer-events: none;
+}
+
+.overlay__button {
+  pointer-events: all;
+}

@@ -6,7 +6,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.15.1",
     "@googlemaps/react-wrapper": "^1.1.35",
+    "@heroicons/react": "^2.0.13",
     "@react-google-maps/api": "^2.17.0",
     "axios": "^1.2.0",
     "cors": "^2.8.5",
@@ -14,7 +16,8 @@
     "mysql": "^2.18.1",
     "next": "latest",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@types/node": "18.11.3",
