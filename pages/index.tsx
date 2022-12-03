@@ -32,7 +32,7 @@ const Home: NextPage = () => {
       return;
     } else {
       axios
-        .post("https://fuber.vercel.com/api/addUser", {
+        .post("https://fuber.vercel.app/api/addUser", {
           params: {
             email: email,
             password: password,
@@ -42,7 +42,7 @@ const Home: NextPage = () => {
         })
         .then((res) => {
           axios
-            .get("https://fuber.vercel.com/api/getUser", {
+            .get("https://fuber.vercel.app/api/getUser", {
               params: {
                 email: email,
               },
