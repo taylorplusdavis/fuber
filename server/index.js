@@ -10,7 +10,7 @@ app.use(express.json());
 
 if (process.env.NODE_ENV === "production") {
   // Set static folder
-  app.use(express.static("../.next/static"));
+  app.use(express.static("../.next/server/pages"));
 
   app.get("/", (req, res) => {
     res.sendFile(
