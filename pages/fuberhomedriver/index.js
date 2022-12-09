@@ -15,7 +15,7 @@ function index() {
 
     const isOpenRide = () => {
       axios
-        .post("http://localhost:3000/api/checkOpenRide", {
+        .post("https://fuber.vercel.app/api/checkOpenRide", {
           params: {
             id: user.id,
           },
@@ -38,7 +38,7 @@ function index() {
 
       // Update database with user's current location
       setInterval(() => {
-        axios.post("http://localhost:3000/api/updateLocation", {
+        axios.post("https://fuber.vercel.app/api/updateLocation", {
           params: {
             lat: lat,
             lng: lng,
@@ -49,7 +49,7 @@ function index() {
     });
 
     const interval = setInterval(() => {
-      axios.post("http://localhost:3000/api/getOpenRides").then((res) => {
+      axios.post("https://fuber.vercel.app/api/getOpenRides").then((res) => {
         setRides(res.data);
       });
     }, 1000);
@@ -57,7 +57,7 @@ function index() {
 
   const handleAcceptRide = (rideId) => {
     axios
-      .post("http://localhost:3000/api/acceptRide", {
+      .post("https://fuber.vercel.app/api/acceptRide", {
         params: {
           driverId: user.id,
           rideId: rideId,
@@ -71,7 +71,7 @@ function index() {
 
   const handleDropoff = () => {
     axios
-      .post("http://localhost:3000/api/dropoff", {
+      .post("https://fuber.vercel.app/api/dropoff", {
         params: {
           rideId: rideId,
         },

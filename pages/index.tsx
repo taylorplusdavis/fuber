@@ -11,7 +11,7 @@ const Home: NextPage = () => {
 
   const getUser = async () => {
     await axios
-      .post("http://localhost:3000/api/getUser", {
+      .post("https://fuber.vercel.app/api/getUser", {
         params: {
           email: "tdav148@lsu.edu",
         },
@@ -41,7 +41,7 @@ const Home: NextPage = () => {
       return;
     } else {
       axios
-        .post("http://localhost:3000/api/addUser", {
+        .post("https://fuber.vercel.app/api/addUser", {
           params: {
             email: email,
             password: password,
@@ -51,7 +51,7 @@ const Home: NextPage = () => {
         })
         .then((res) => {
           axios
-            .post("http://localhost:3000/api/getUser", {
+            .post("https://fuber.vercel.app/api/getUser", {
               params: {
                 email: email,
               },
