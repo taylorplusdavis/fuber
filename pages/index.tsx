@@ -82,7 +82,6 @@ const Home: NextPage = () => {
         {/* logo */}
         <div className="logo__container">
           <h1 className="logo__logo">Fuber</h1>
-          <button onClick={() => getUser()}>Get Users</button>
         </div>
         {/* login */}
         <fieldset className="form__container">
