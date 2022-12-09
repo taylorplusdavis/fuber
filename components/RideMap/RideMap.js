@@ -31,7 +31,7 @@ function Map() {
 
       // Update database with user's current location
       setInterval(() => {
-        axios.post("https://fuber.vercel.app/api/updateLocation", {
+        axios.post("http://localhost:3000/api/updateLocation", {
           params: {
             lat: lat,
             lng: lng,
@@ -97,7 +97,7 @@ function Map() {
 
       const interval = setInterval(() => {
         axios
-          .post("https://fuber.vercel.app/api/checkComplete", {
+          .post("http://localhost:3000/api/checkComplete", {
             params: {
               id: user.id,
             },
@@ -111,7 +111,7 @@ function Map() {
       }, 3000);
 
       axios
-        .post("https://fuber.vercel.app/api/getRideInProgress", {
+        .post("http://localhost:3000/api/getRideInProgress", {
           params: {
             id: user.id,
           },

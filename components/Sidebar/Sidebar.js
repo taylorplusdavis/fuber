@@ -14,7 +14,7 @@ function Sidebar() {
     let user = JSON.parse(localStorage.getItem("session"));
 
     axios
-      .post("https://fuber.vercel.app/api/getReview", {
+      .post("http://localhost:3000/api/getReview", {
         params: {
           id: user.id,
         },
@@ -33,7 +33,7 @@ function Sidebar() {
         Earned Reviews
       </h1>
       {reviews?.map((review) => (
-        <ReviewItem review={review} />
+        <ReviewItem key={review.id} review={review} />
       ))}
     </div>
   );

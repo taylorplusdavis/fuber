@@ -14,7 +14,7 @@ function index() {
     e.preventDefault();
 
     axios
-      .post("https://fuber.vercel.app/api/submitReview", {
+      .post("http://localhost:3000/api/submitReview", {
         params: {
           id: user.id,
           rating: e.target.rating.value,

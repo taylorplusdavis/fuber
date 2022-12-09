@@ -10,18 +10,35 @@ function index() {
   const Router = useRouter();
 
   useEffect(() => {
+    let user = JSON.parse(localStorage.getItem("session"));
     setUser(JSON.parse(localStorage.getItem("session")));
+
+    const isOpenRide = () => {
+      axios
+        .post("http://localhost:3000/api/checkOpenRide", {
+          params: {
+            id: user.id,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          if (res.data.length > 0 && res.data[0] !== false) {
+            setDriving(true);
+            setRideId((prev) => res.data[0].id);
+          }
+        });
+    };
+    isOpenRide();
+
     let lat, lng;
 
-    let user = JSON.parse(localStorage.getItem("session"));
     navigator.geolocation.getCurrentPosition((position) => {
       lat = position.coords.latitude;
       lng = position.coords.longitude;
 
       // Update database with user's current location
       setInterval(() => {
-        console.log("Updating location");
-        axios.post("https://fuber.vercel.app/api/updateLocation", {
+        axios.post("http://localhost:3000/api/updateLocation", {
           params: {
             lat: lat,
             lng: lng,
@@ -32,7 +49,7 @@ function index() {
     });
 
     const interval = setInterval(() => {
-      axios.post("https://fuber.vercel.app/api/getOpenRides").then((res) => {
+      axios.post("http://localhost:3000/api/getOpenRides").then((res) => {
         setRides(res.data);
       });
     }, 1000);
@@ -40,7 +57,7 @@ function index() {
 
   const handleAcceptRide = (rideId) => {
     axios
-      .post("https://fuber.vercel.app/api/acceptRide", {
+      .post("http://localhost:3000/api/acceptRide", {
         params: {
           driverId: user.id,
           rideId: rideId,
@@ -54,7 +71,7 @@ function index() {
 
   const handleDropoff = () => {
     axios
-      .post("https://fuber.vercel.app/api/dropoff", {
+      .post("http://localhost:3000/api/dropoff", {
         params: {
           rideId: rideId,
         },
@@ -62,7 +79,6 @@ function index() {
       .then((res) => {
         setDriving(false);
         setRideId("");
-        console.log(res.data);
         Router.push("/ridecomplete");
       });
   };

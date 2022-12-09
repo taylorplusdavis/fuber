@@ -1,16 +1,25 @@
 import axios from "axios";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Script from "next/script";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Home: NextPage = () => {
   const [error, setError] = useState("");
-
   const router = useRouter();
+
+  const getUser = async () => {
+    await axios
+      .post("http://localhost:3000/api/getUser", {
+        params: {
+          email: "tdav148@lsu.edu",
+        },
+      })
+      .then((res) => {
+        console.log(res.data[0]);
+      });
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -32,7 +41,7 @@ const Home: NextPage = () => {
       return;
     } else {
       axios
-        .post("https://fuber.vercel.app/api/addUser", {
+        .post("http://localhost:3000/api/addUser", {
           params: {
             email: email,
             password: password,
@@ -42,7 +51,7 @@ const Home: NextPage = () => {
         })
         .then((res) => {
           axios
-            .get("https://fuber.vercel.app/api/getUser", {
+            .get("http://localhost:3000:api/getUser", {
               params: {
                 email: email,
               },
@@ -73,6 +82,7 @@ const Home: NextPage = () => {
         {/* logo */}
         <div className="logo__container">
           <h1 className="logo__logo">Fuber</h1>
+          <button onClick={() => getUser()}>Get Users</button>
         </div>
         {/* login */}
         <fieldset className="form__container">
