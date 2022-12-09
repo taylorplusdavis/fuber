@@ -7,6 +7,7 @@
     "heroku-postbuild": "next start"
   },
   "dependencies": {
+    "@fontsource/montserrat": "^4.5.13",
     "@googlemaps/js-api-loader": "^1.15.1",
     "@googlemaps/react-wrapper": "^1.1.35",
     "@heroicons/react": "^2.0.13",
