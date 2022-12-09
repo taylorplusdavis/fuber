@@ -14,7 +14,7 @@ function Sidebar() {
     let user = JSON.parse(localStorage.getItem("session"));
 
     axios
-      .post("http://localhost:3000/api/getReview", {
+      .post("https://fuber.vercel.app/api/getReview", {
         params: {
           id: user.id,
         },

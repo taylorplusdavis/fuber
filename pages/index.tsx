@@ -51,7 +51,7 @@ const Home: NextPage = () => {
         })
         .then((res) => {
           axios
-            .get("http://localhost:3000:api/getUser", {
+            .post("http://localhost:3000/api/getUser", {
               params: {
                 email: email,
               },
